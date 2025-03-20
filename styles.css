@@ -14,7 +14,9 @@
     --button-gradient-end: #6d1b7b;
     --form-group-margin-bottom: 20px;
     --section-padding: 30px;
-    --footer-bg: #f0f0f0;
+    --footer-bg: #f8f8f8; /* Lighter background */
+    --footer-font: 'Lato', sans-serif; /* Modern, readable font */
+    --footer-text: #555; /* Slightly darker text color */
 }
 
 /* --- Base Styles --- */
@@ -67,7 +69,8 @@ body {
 /* --- Form Styles --- */
 .registration-form {
     padding: var(--section-padding);
-    flex-grow: 1; /* Allow form to take up remaining space */
+    flex-grow: 1;
+    /* Allow form to take up remaining space */
 }
 
 .form-section {
@@ -146,14 +149,16 @@ textarea {
 
 /* --- Button Styles --- */
 button {
-    background: linear-gradient(to right, var(--button-gradient-start), var(--button-gradient-end));
+    background: linear-gradient(to right, var(--button-gradient-start),
+        var(--button-gradient-end));
     color: var(--color-white);
     padding: 14px 25px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 1.1rem;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    transition: transform 0.1s ease,
+    box-shadow 0.1s ease;
     box-shadow: 0 4px 12px var(--box-shadow-color);
     font-family: var(--font-family-heading);
     position: relative;
@@ -220,27 +225,32 @@ button.processing::after {
 /* --- Footer Styles --- */
 .footer {
     background-color: var(--footer-bg);
-    padding: 30px; /* Increased padding */
-    text-align: center;
-    font-size: 0.9rem;
-    color: #777;
-    border-top: 1px solid var(--color-border); /* Add a top border */
+    padding: 40px 20px;
+    /* Increased vertical padding, reduced horizontal */
+    font-family: var(--footer-font);
+    color: var(--footer-text);
+    border-top: 1px solid var(--color-border);
 }
 
 .footer-content {
     display: flex;
-    flex-direction: column; /* Stack items vertically on smaller screens */
+    flex-direction: column;
+    /* Stack on small screens */
     align-items: center;
-    justify-content: center; /* Center items horizontally */
-    gap: 15px; /* Spacing between contact and powered-by */
+    justify-content: center;
+    gap: 20px;
+    /* Increased gap */
 }
 
 .contact-info {
-    margin-bottom: 0; /* Remove default margin */
+    text-align: center;
+    /* Center text within contact info */
 }
 
 .contact-info p {
-    margin: 0; /* Reset paragraph margins */
+    margin: 0;
+    font-size: 1rem;
+    /* Slightly larger font size */
 }
 
 .contact-info a {
@@ -251,36 +261,48 @@ button.processing::after {
 }
 
 .contact-info a:hover {
-    color: #333;
+    color: var(--color-text);
+    /* Darker hover color */
 }
 
 .powered-by {
-    font-size: 0.85rem; /* Slightly smaller "Powered by" text */
+    font-size: 0.8rem;
+    /* Slightly smaller "Powered by" */
+    color: var(--footer-text);
+    /* Inherit footer text color */
 }
 
 .powered-by a {
-    color: var(--color-text);
-    text-decoration: none; /* Removed underline */
+    color: inherit;
+    /* Inherit color from parent */
+    text-decoration: none;
     font-weight: 400;
+    transition: text-decoration 0.2s ease;
 }
 
 .powered-by a:hover {
-    text-decoration: underline; /* Underline on hover for interaction cue */
+    text-decoration: underline;
 }
 
-/* Media query for layout on wider screens (optional) */
-@media (min-width: 500px) {
+/* Media query for layout on wider screens */
+@media (min-width: 600px) {
     .footer-content {
-        flex-direction: row; /* Display side-by-side on larger screens */
-        justify-content: space-between; /* Space them out */
+        flex-direction: row;
+        /* Side-by-side on larger screens */
+        justify-content: space-between;
+        /* Space them out */
+        align-items: flex-start;
+        /* Align items to the start of the container */
     }
 
     .contact-info {
-        text-align: left; /* Align contact info left */
+        text-align: left;
+        /* Left align on wider screens */
     }
 
     .powered-by {
-        text-align: right; /* Align "Powered by" right */
+        text-align: right;
+        /* Right align on wider screens */
     }
 }
 
@@ -309,3 +331,6 @@ button.processing::after {
         font-size: 1rem;
     }
 }
+
+/* --- New Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
