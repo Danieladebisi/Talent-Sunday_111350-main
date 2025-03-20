@@ -9,20 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const transferNameGroup = document.getElementById('transferNameGroup');
     const transactionNameInput = document.getElementById('transactionName');
     const errorMessagesDiv = document.getElementById('errorMessages');
+    const submitButton = document.querySelector('button[type="submit"]');
 
-    // Function to display error messages
     function displayError(message) {
         errorMessagesDiv.textContent = message;
         errorMessagesDiv.style.display = 'block';
     }
 
-    // Function to clear error messages
     function clearErrors() {
         errorMessagesDiv.textContent = '';
         errorMessagesDiv.style.display = 'none';
     }
 
-    // Talent Type Change Handler
     talentTypeSelect.addEventListener('change', () => {
         if (talentTypeSelect.value === 'other') {
             otherTalentGroup.style.display = 'flex';
@@ -33,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Payment Method Change Handler
     paymentMethodSelect.addEventListener('change', () => {
         if (paymentMethodSelect.value === 'cash') {
             cashDetails.style.display = 'block';
@@ -53,40 +50,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Form Submission Handler
     form.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Prevent the default form submission
+        event.preventDefault();
 
-        clearErrors(); // Clear any previous error messages
+        clearErrors();
 
-        // Collect form data
+        submitButton.classList.add('processing');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+
         const formData = new FormData(form);
         const formDataObject = {};
         formData.forEach((value, key) => {
             formDataObject[key] = value;
         });
 
-        //  ***IMPORTANT: Replace with your EmailJS credentials***
-        emailjs.send(
-            'service_xl3wr8l', //  <----  YOUR Service ID
-            'template_7ktedtm', //  <----  YOUR Template ID
-            formDataObject,
-            'm5cA-okHHGdZuWJoh'    //  <----  YOUR Public Key
-        )
-            .then((response) => {
-                console.log('SUCCESS!', response.status, response.text);
-                alert('Registration submitted successfully!');
-                form.reset();
+        try {
+            const response = await emailjs.send(
+                'service_xl3wr8l',
+                'template_7ktedtm',
+                formDataObject,
+                'm5cA-okHHGdZuWJoh'
+            );
 
-                // Hide additional fields after successful submission
-                otherTalentGroup.style.display = 'none';
-                cashDetails.style.display = 'none';
-                transferDetails.style.display = 'none';
-                transferNameGroup.style.display = 'none';
+            console.log('SUCCESS!', response.status, response.text);
+            alert('Registration submitted successfully!');
+            form.reset();
 
-            }, (err) => {
-                console.log('FAILED...', err);
-                displayError('Error submitting form. Please try again.');
-            });
+            otherTalentGroup.style.display = 'none';
+            cashDetails.style.display = 'none';
+            transferDetails.style.display = 'none';
+            transferNameGroup.style.display = 'none';
+        } catch (err) {
+            console.log('FAILED...', err);
+            displayError('Error submitting form. Please try again.');
+        } finally {
+            submitButton.classList.remove('processing');
+            submitButton.disabled = false;
+            submitButton.textContent = 'Submit Registration';
+        }
     });
 });
