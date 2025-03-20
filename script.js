@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault(); // Prevent default form submission
         clearErrors(); // Clear previous errors
 
-        let errors =;
+        let errors = [];
 
         // --- Validation ---
         // Full Name
