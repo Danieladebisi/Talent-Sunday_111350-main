@@ -14,9 +14,12 @@
     --button-gradient-end: #6d1b7b;
     --form-group-margin-bottom: 20px;
     --section-padding: 30px;
-    --footer-bg: #f8f8f8; /* Lighter background */
-    --footer-font: 'Lato', sans-serif; /* Modern, readable font */
-    --footer-text: #555; /* Slightly darker text color */
+    --footer-bg: #f8f8f8;
+    /* Lighter background */
+    --footer-font: 'Lato', sans-serif;
+    /* Modern, readable font */
+    --footer-text: #555;
+    /* Slightly darker text color */
 }
 
 /* --- Base Styles --- */
@@ -218,7 +221,7 @@ button.processing::after {
     background-color: var(--color-error);
     border: 1px solid var(--color-error-text);
     border-radius: 6px;
-    display: block;
+    display: none;
     font-size: 0.9rem;
 }
 
