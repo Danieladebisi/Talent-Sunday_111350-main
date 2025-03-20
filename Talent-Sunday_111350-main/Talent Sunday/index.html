@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Talent Sunday Registration</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Talent Sunday Registration</h1>
+            <p class="church-info">
+                <i class="fas fa-church"></i>
+                Redeemed Christian Church of God (Solution Arena)
+            </p>
+            <p class="church-info">
+                <i class="fas fa-map-marker-alt"></i>
+                01 Prince Tajudeen Street off College Road, Olodi Apapa, Lagos
+            </p>
+        </header>
+
+        <form id="registrationForm">
+            <fieldset>
+                <legend><i class="fas fa-user"></i> Personal Information</legend>
+                <div class="form-group">
+                    <label for="fullName"><i class="fas fa-signature"></i> Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone"><i class="fas fa-phone"></i> Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="age"><i class="fas fa-birthday-cake"></i> Age:</label>
+                    <input type="number" id="age" name="age">
+                </div>
+                <div class="form-group">
+                    <label for="membership"><i class="fas fa-users"></i> Church Membership (if
+                        applicable):</label>
+                    <input type="text" id="membership" name="membership">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend><i class="fas fa-microphone"></i> Performance Details</legend>
+                <div class="form-group">
+                    <label for="talentType"><i class="fas fa-theater-masks"></i> Talent Type:</label>
+                    <select id="talentType" name="talentType" required>
+                        <option value="">Select...</option>
+                        <option value="singing">Singing</option>
+                        <option value="dancing">Dancing</option>
+                        <option value="instrumental">Instrumental</option>
+                        <option value="drama">Drama/Spoken Word</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group" id="otherTalentGroup" style="display: none;">
+                    <label for="otherTalent"><i class="fas fa-info-circle"></i> Specify Other Talent:</label>
+                    <input type="text" id="otherTalent" name="otherTalent">
+                </div>
+                <div class="form-group">
+                    <label for="performanceTitle"><i class="fas fa-heading"></i> Performance Title (if
+                        applicable):</label>
+                    <input type="text" id="performanceTitle" name="performanceTitle">
+                </div>
+                <div class="form-group">
+                    <label for="performanceDescription"><i class="fas fa-file-alt"></i> Performance
+                        Description:</label>
+                    <textarea id="performanceDescription" name="performanceDescription"
+                        required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="equipment"><i class="fas fa-tools"></i> Equipment/Technical Needs:</label>
+                    <textarea id="equipment" name="equipment"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="duration"><i class="fas fa-clock"></i> Performance Duration (minutes):</label>
+                    <input type="number" id="duration" name="duration" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="participants"><i class="fas fa-users"></i> Number of Participants (if a
+                        group):</label>
+                    <input type="number" id="participants" name="participants" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="participantNames"><i class="fas fa-user-friends"></i> Names of Participants (if a
+                        group, separated by commas):</label>
+                    <textarea id="participantNames" name="participantNames"></textarea>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend><i class="fas fa-money-bill-wave"></i> Payment Information </legend>
+                <div class="form-group">
+                    <label><i class="fas fa-tag"></i> Registration Fee:</label>
+                    <input type="text" value="1000 Naira" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentMethod"><i class="fas fa-hand-holding-usd"></i> Payment Method:</label>
+                    <select id="paymentMethod" name="paymentMethod">
+                        <option value="">Select...</option>
+                        <option value="cash">Cash</option>
+                        <option value="transfer">Transfer</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="cashDetails" style="display: none;">
+                    <p>Please come with your payment to the church.</p>
+                </div>
+
+                <div class="form-group" id="transferDetails" style="display: none;">
+                    <p>
+                        Make your transfer to the following account:
+                    </p>
+                    <p>
+                        <strong>Account Number:</strong> 8035228722<br>
+                        <strong>Bank:</strong> Opay<br>
+                        <strong>Account Name:</strong> Motunrayo Babatunde Joy
+                    </p>
+                </div>
+
+                <div class="form-group" id="transferNameGroup" style="display: none;">
+                    <label for="transactionName"><i class="fas fa-user-check"></i> Name on Transaction:</label>
+                    <input type="text" id="transactionName" name="transactionName">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend><i class="fas fa-check-circle"></i> Confirmation</legend>
+                <div class="form-group">
+                    <label for="rulesConfirmation">
+                        <input type="checkbox" id="rulesConfirmation" name="rulesConfirmation" required>
+                        I have read and agree to the rules and regulations.
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="consentConfirmation">
+                        <input type="checkbox" id="consentConfirmation" name="consentConfirmation" required>
+                        I consent to recording and photographing performances.
+                    </label>
+                </div>
+            </fieldset>
+
+            <button type="submit">Submit Registration</button>
+            <div id="errorMessages" class="error"></div>
+        </form>
+    </div>
+
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "m5cA-okHHGdZuWJoh",
+            });
+        })();
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
