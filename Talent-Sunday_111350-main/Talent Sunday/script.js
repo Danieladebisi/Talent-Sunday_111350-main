@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         submitButton.classList.add('processing');
         submitButton.disabled = true;
-        submitButton.textContent = 'Submitting...';
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
 
         const formData = new FormData(form);
         const formDataObject = {};
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } finally {
             submitButton.classList.remove('processing');
             submitButton.disabled = false;
-            submitButton.textContent = 'Submit Registration';
+            submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Registration';
         }
     });
 });

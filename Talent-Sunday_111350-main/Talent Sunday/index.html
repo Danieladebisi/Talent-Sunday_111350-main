@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet">
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Talent Sunday Registration</title>
 </head>
 
@@ -18,42 +18,68 @@
         <header class="registration-header">
             <h1 class="registration-title">Talent Sunday Registration</h1>
             <p class="church-info">
+                <i class="fas fa-church"></i>
                 Redeemed Christian Church of God (Solution Arena)
             </p>
             <p class="church-info">
+                <i class="fas fa-map-marker-alt"></i>
                 01 Prince Tajudeen Street off College Road, Olodi Apapa, Lagos
             </p>
         </header>
 
         <form id="registrationForm" class="registration-form">
             <section class="form-section">
-                <h2 class="section-title">Personal Information</h2>
+                <h2 class="section-title">
+                    <i class="fas fa-user"></i>
+                    Personal Information
+                </h2>
                 <div class="form-group">
-                    <label for="fullName">Full Name</label>
+                    <label for="fullName">
+                        <i class="fas fa-signature"></i>
+                        Full Name
+                    </label>
                     <input type="text" id="fullName" name="fullName" required>
                 </div>
                 <div class="form-group">
-                    <label for="phone">Phone Number</label>
+                    <label for="phone">
+                        <i class="fas fa-phone"></i>
+                        Phone Number
+                    </label>
                     <input type="tel" id="phone" name="phone" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email Address</label>
+                    <label for="email">
+                        <i class="fas fa-envelope"></i>
+                        Email Address
+                    </label>
                     <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="age">Age</label>
+                    <label for="age">
+                        <i class="fas fa-birthday-cake"></i>
+                        Age
+                    </label>
                     <input type="number" id="age" name="age">
                 </div>
                 <div class="form-group">
-                    <label for="membership">Church Membership (if applicable)</label>
+                    <label for="membership">
+                        <i class="fas fa-users"></i>
+                        Church Membership (if applicable)
+                    </label>
                     <input type="text" id="membership" name="membership">
                 </div>
             </section>
 
             <section class="form-section">
-                <h2 class="section-title">Performance Details</h2>
+                <h2 class="section-title">
+                    <i class="fas fa-microphone"></i>
+                    Performance Details
+                </h2>
                 <div class="form-group">
-                    <label for="talentType">Talent Type</label>
+                    <label for="talentType">
+                        <i class="fas fa-theater-masks"></i>
+                        Talent Type
+                    </label>
                     <select id="talentType" name="talentType" required>
                         <option value="">Select...</option>
                         <option value="singing">Singing</option>
@@ -64,43 +90,73 @@
                     </select>
                 </div>
                 <div class="form-group" id="otherTalentGroup" style="display: none;">
-                    <label for="otherTalent">Specify Other Talent</label>
+                    <label for="otherTalent">
+                        <i class="fas fa-info-circle"></i>
+                        Specify Other Talent
+                    </label>
                     <input type="text" id="otherTalent" name="otherTalent">
                 </div>
                 <div class="form-group">
-                    <label for="performanceTitle">Performance Title (if applicable)</label>
+                    <label for="performanceTitle">
+                        <i class="fas fa-heading"></i>
+                        Performance Title (if applicable)
+                    </label>
                     <input type="text" id="performanceTitle" name="performanceTitle">
                 </div>
                 <div class="form-group">
-                    <label for="performanceDescription">Performance Description</label>
+                    <label for="performanceDescription">
+                        <i class="fas fa-file-alt"></i>
+                        Performance Description
+                    </label>
                     <textarea id="performanceDescription" name="performanceDescription" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="equipment">Equipment/Technical Needs</label>
+                    <label for="equipment">
+                        <i class="fas fa-tools"></i>
+                        Equipment/Technical Needs
+                    </label>
                     <textarea id="equipment" name="equipment"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="duration">Performance Duration (minutes)</label>
+                    <label for="duration">
+                        <i class="fas fa-clock"></i>
+                        Performance Duration (minutes)
+                    </label>
                     <input type="number" id="duration" name="duration" min="1">
                 </div>
                 <div class="form-group">
-                    <label for="participants">Number of Participants (if a group)</label>
+                    <label for="participants">
+                        <i class="fas fa-users"></i>
+                        Number of Participants (if a group)
+                    </label>
                     <input type="number" id="participants" name="participants" min="1">
                 </div>
                 <div class="form-group">
-                    <label for="participantNames">Names of Participants (if a group, separated by commas)</label>
+                    <label for="participantNames">
+                        <i class="fas fa-user-friends"></i>
+                        Names of Participants (if a group, separated by commas)
+                    </label>
                     <textarea id="participantNames" name="participantNames"></textarea>
                 </div>
             </section>
 
             <section class="form-section">
-                <h2 class="section-title">Payment Information</h2>
+                <h2 class="section-title">
+                    <i class="fas fa-money-bill-wave"></i>
+                    Payment Information
+                </h2>
                 <div class="form-group">
-                    <label>Registration Fee</label>
+                    <label>
+                        <i class="fas fa-tag"></i>
+                        Registration Fee
+                    </label>
                     <input type="text" value="1000 Naira" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="paymentMethod">Payment Method</label>
+                    <label for="paymentMethod">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        Payment Method
+                    </label>
                     <select id="paymentMethod" name="paymentMethod">
                         <option value="">Select...</option>
                         <option value="cash">Cash</option>
@@ -119,13 +175,19 @@
                     </p>
                 </div>
                 <div class="form-group" id="transferNameGroup" style="display: none;">
-                    <label for="transactionName">Name on Transaction</label>
+                    <label for="transactionName">
+                        <i class="fas fa-user-check"></i>
+                        Name on Transaction
+                    </label>
                     <input type="text" id="transactionName" name="transactionName">
                 </div>
             </section>
 
             <section class="form-section">
-                <h2 class="section-title">Confirmation</h2>
+                <h2 class="section-title">
+                    <i class="fas fa-check-circle"></i>
+                    Confirmation
+                </h2>
                 <div class="form-group">
                     <label for="rulesConfirmation">
                         <input type="checkbox" id="rulesConfirmation" name="rulesConfirmation" required>
@@ -140,15 +202,27 @@
                 </div>
             </section>
 
-            <button type="submit">Submit Registration</button>
+            <button type="submit">
+                <i class="fas fa-paper-plane"></i>
+                Submit Registration
+            </button>
             <div id="errorMessages" class="error"></div>
         </form>
 
         <section class="contact-section">
-            <h2 class="section-title">Enquiries</h2>
+            <h2 class="section-title">
+                <i class="fas fa-question-circle"></i>
+                Enquiries
+            </h2>
             <p>
-                Contact <a href="tel:+2348035228727">Motunrayo: +2348035228727</a>
-                or email <a href="mailto:babatundemotunrayo080@gmail.com">babatundemotunrayo080@gmail.com</a>
+                Contact <a href="tel:+2348035228727">
+                    <i class="fas fa-phone"></i>
+                    Motunrayo: +2348035228727
+                </a>
+                or email <a href="mailto:babatundemotunrayo080@gmail.com">
+                    <i class="fas fa-envelope"></i>
+                    babatundemotunrayo080@gmail.com
+                </a>
             </p>
         </section>
     </div>
