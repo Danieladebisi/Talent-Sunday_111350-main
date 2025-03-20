@@ -220,14 +220,27 @@ button.processing::after {
 /* --- Footer Styles --- */
 .footer {
     background-color: var(--footer-bg);
-    padding: 20px;
+    padding: 30px; /* Increased padding */
     text-align: center;
     font-size: 0.9rem;
     color: #777;
+    border-top: 1px solid var(--color-border); /* Add a top border */
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    align-items: center;
+    justify-content: center; /* Center items horizontally */
+    gap: 15px; /* Spacing between contact and powered-by */
 }
 
 .contact-info {
-    margin-bottom: 10px;
+    margin-bottom: 0; /* Remove default margin */
+}
+
+.contact-info p {
+    margin: 0; /* Reset paragraph margins */
 }
 
 .contact-info a {
@@ -241,9 +254,34 @@ button.processing::after {
     color: #333;
 }
 
+.powered-by {
+    font-size: 0.85rem; /* Slightly smaller "Powered by" text */
+}
+
 .powered-by a {
     color: var(--color-text);
-    text-decoration: underline;
+    text-decoration: none; /* Removed underline */
+    font-weight: 400;
+}
+
+.powered-by a:hover {
+    text-decoration: underline; /* Underline on hover for interaction cue */
+}
+
+/* Media query for layout on wider screens (optional) */
+@media (min-width: 500px) {
+    .footer-content {
+        flex-direction: row; /* Display side-by-side on larger screens */
+        justify-content: space-between; /* Space them out */
+    }
+
+    .contact-info {
+        text-align: left; /* Align contact info left */
+    }
+
+    .powered-by {
+        text-align: right; /* Align "Powered by" right */
+    }
 }
 
 /* --- Responsive Adjustments --- */
