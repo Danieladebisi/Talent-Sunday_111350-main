@@ -173,9 +173,9 @@ document.addEventListener('DOMContentLoaded', function () {
             // e.g., to_name: "Admin"
         };
 
-        // !!! IMPORTANT: Replace placeholders with your actual EmailJS Service ID and Template ID !!!
-        const emailJsServiceId = "service_YOUR_SERVICE_ID"; // <-- Replace with your Service ID
-        const emailJsTemplateId = "template_YOUR_TEMPLATE_ID"; // <-- Replace with your Template ID
+        // Updated: Using your actual EmailJS Service ID and Template ID
+        const emailJsServiceId = "service_xl3wr8l"; // Your Service ID
+        const emailJsTemplateId = "template_7ktedtm"; // Your Template ID
 
         // Send the email using EmailJS
         emailjs.send(emailJsServiceId, emailJsTemplateId, templateParams)
@@ -193,8 +193,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('FAILED...', error);
                 // Display a more specific error if possible, otherwise generic
                 let errorMsg = 'Registration failed. Please try again.';
-                if (error.status === 400) {
-                   errorMsg += ' (Check EmailJS configuration - Service/Template ID)';
+                // Check if the error object provides more details
+                if (error && error.status) {
+                     errorMsg += ` (Status: ${error.status}, Text: ${error.text || 'No details'})`;
+                } else if (error) {
+                     errorMsg += ` (Error: ${error})`;
                 }
                  // Display error using the error div
                 displayErrors([errorMsg]);
