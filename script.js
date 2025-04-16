@@ -1,53 +1,59 @@
+// Wait for the HTML document to be fully loaded and parsed
 document.addEventListener('DOMContentLoaded', function () {
+    // Get references to the form and relevant elements by their correct IDs
     const form = document.getElementById('registrationForm');
     const talentTypeSelect = document.getElementById('talentType');
-    const otherTalentLabel = document.getElementById('otherTalentLabel');
+    // Corrected: Get the group div for 'Other Talent'
+    const otherTalentGroup = document.getElementById('otherTalentGroup');
     const otherTalentInput = document.getElementById('otherTalent');
     const paymentMethodSelect = document.getElementById('paymentMethod');
-    const paymentSlipLabel = document.getElementById('paymentSlipLabel');
-    const paymentSlipInput = document.getElementById('paymentSlip');
-    const transactionIdLabel = document.getElementById('transactionIdLabel');
-    const transactionIdInput = document.getElementById('transactionId');
+    // Corrected: Get the divs for cash/transfer details and the transaction name input group/input
+    const cashDetails = document.getElementById('cashDetails');
+    const transferDetails = document.getElementById('transferDetails');
+    const transferNameGroup = document.getElementById('transferNameGroup');
+    const transactionNameInput = document.getElementById('transactionName');
     const errorMessagesDiv = document.getElementById('errorMessages');
 
     // --- Talent Type Handling ---
+    // Show/hide the 'Other Talent' input field based on selection
     talentTypeSelect.addEventListener('change', function () {
         if (talentTypeSelect.value === 'other') {
-            otherTalentLabel.style.display = 'block';
-            otherTalentInput.style.display = 'block';
-            otherTalentInput.setAttribute('required', 'required');
+            // Corrected: Show the group div
+            otherTalentGroup.style.display = 'block';
+            otherTalentInput.setAttribute('required', 'required'); // Make input required
         } else {
-            otherTalentLabel.style.display = 'none';
-            otherTalentInput.style.display = 'none';
-            otherTalentInput.removeAttribute('required');
+            // Corrected: Hide the group div
+            otherTalentGroup.style.display = 'none';
+            otherTalentInput.removeAttribute('required'); // Make input not required
+            otherTalentInput.value = ''; // Clear the input if hidden
         }
     });
 
     // --- Payment Method Handling ---
+    // Show/hide payment details based on the selected method ('cash' or 'transfer')
     paymentMethodSelect.addEventListener('change', function () {
-        if (paymentMethodSelect.value === 'online') {
-            paymentSlipLabel.style.display = 'block';
-            paymentSlipInput.style.display = 'block';
-            paymentSlipInput.setAttribute('required', 'required');
-            transactionIdLabel.style.display = 'block';
-            transactionIdInput.style.display = 'block';
-            transactionIdInput.setAttribute('required', 'required');
+        const selectedMethod = paymentMethodSelect.value;
+
+        // Show/hide relevant sections based on selection
+        cashDetails.style.display = selectedMethod === 'cash' ? 'block' : 'none';
+        transferDetails.style.display = selectedMethod === 'transfer' ? 'block' : 'none';
+        transferNameGroup.style.display = selectedMethod === 'transfer' ? 'block' : 'none';
+
+        // Make 'Name on Transaction' required only if 'Transfer' is selected
+        if (selectedMethod === 'transfer') {
+            transactionNameInput.setAttribute('required', 'required');
         } else {
-            paymentSlipLabel.style.display = 'none';
-            paymentSlipInput.style.display = 'none';
-            paymentSlipInput.removeAttribute('required');
-            transactionIdLabel.style.display = 'none';
-            transactionIdInput.style.display = 'none';
-            transactionIdInput.removeAttribute('required');
+            transactionNameInput.removeAttribute('required');
+            transactionNameInput.value = ''; // Clear the input if not required
         }
     });
 
     // --- Form Submission Handling ---
     form.addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent default form submission
-        clearErrors(); // Clear previous errors
+        event.preventDefault(); // Prevent default form submission behavior
+        clearErrors(); // Clear any previous error messages
 
-        let errors = [];
+        let errors = []; // Initialize an array to hold validation errors
 
         // --- Validation ---
         // Full Name
@@ -87,18 +93,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Payment Method
-        if (paymentMethodSelect.value === '') {
+        const paymentMethod = paymentMethodSelect.value;
+        if (paymentMethod === '') {
             errors.push('Payment Method is required.');
         }
 
-        // Payment Slip and Transaction ID (if applicable)
-        if (paymentMethodSelect.value === 'online') {
-            if (!paymentSlipInput.files || paymentSlipInput.files.length === 0) {
-                errors.push('Payment Slip is required for Online payments.');
-            }
-            if (transactionIdInput.value.trim() === '') {
-                errors.push('Transaction ID is required for Online payments.');
-            }
+        // Corrected: Transaction Name (if applicable)
+        if (paymentMethod === 'transfer' && transactionNameInput.value.trim() === '') {
+            errors.push('Name on Transaction is required for Transfer payments.');
         }
 
         // Rules Confirmation
@@ -113,22 +115,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // --- Error Display or Submission ---
         if (errors.length > 0) {
-            displayErrors(errors); // Display errors
+            displayErrors(errors); // Display errors if any were found
         } else {
-            // If no errors, proceed with form submission (EmailJS)
+            // If no errors, proceed with form submission using EmailJS
             sendEmail(form);
         }
     });
 
     // --- Helper Functions ---
 
-    // Function to validate email format
+    // Function to validate email format using a simple regex
     function isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
 
-    // Function to display error messages
+    // Function to display error messages in the designated div
     function displayErrors(errors) {
         let errorList = '<ul>';
         errors.forEach(error => {
@@ -136,39 +138,72 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         errorList += '</ul>';
         errorMessagesDiv.innerHTML = errorList;
-        errorMessagesDiv.style.display = 'block';
+        errorMessagesDiv.style.display = 'block'; // Make errors visible
     }
 
     // Function to clear error messages
     function clearErrors() {
         errorMessagesDiv.innerHTML = '';
-        errorMessagesDiv.style.display = 'none';
+        errorMessagesDiv.style.display = 'none'; // Hide the error container
     }
 
     // --- EmailJS Integration ---
     function sendEmail(form) {
-        // Collect form data
+        // Show some processing indication (optional)
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+
+        // Collect form data into an object
         const formData = new FormData(form);
         const formDataObject = {};
         formData.forEach((value, key) => {
-            formDataObject[key] = value;
+            // Skip file inputs if any were accidentally left (EmailJS sends field data)
+            if (!(value instanceof File)) {
+                 formDataObject[key] = value;
+            }
         });
 
-        // EmailJS parameters
+        // EmailJS parameters (data to be sent to your template)
         const templateParams = {
             ...formDataObject,
-            // You can add other parameters here if needed
+            // Add any other specific parameters your EmailJS template expects
+            // e.g., to_name: "Admin"
         };
 
+        // !!! IMPORTANT: Replace placeholders with your actual EmailJS Service ID and Template ID !!!
+        const emailJsServiceId = "service_YOUR_SERVICE_ID"; // <-- Replace with your Service ID
+        const emailJsTemplateId = "template_YOUR_TEMPLATE_ID"; // <-- Replace with your Template ID
+
         // Send the email using EmailJS
-        emailjs.send("service_YOUR_SERVICE_ID", "template_YOUR_TEMPLATE_ID", templateParams)
+        emailjs.send(emailJsServiceId, emailJsTemplateId, templateParams)
             .then(function (response) {
                 console.log('SUCCESS!', response.status, response.text);
-                alert('Registration successful! We have sent you a confirmation email.');
-                form.reset(); // Reset the form
+                alert('Registration successful! Thank you.'); // Inform user
+                form.reset(); // Reset the form fields
+                // Manually hide conditional fields again after reset
+                otherTalentGroup.style.display = 'none';
+                cashDetails.style.display = 'none';
+                transferDetails.style.display = 'none';
+                transferNameGroup.style.display = 'none';
+                clearErrors(); // Clear errors on success
             }, function (error) {
                 console.error('FAILED...', error);
-                alert('Registration failed. Please try again.');
+                // Display a more specific error if possible, otherwise generic
+                let errorMsg = 'Registration failed. Please try again.';
+                if (error.status === 400) {
+                   errorMsg += ' (Check EmailJS configuration - Service/Template ID)';
+                }
+                 // Display error using the error div
+                displayErrors([errorMsg]);
+                alert(errorMsg); // Also alert the user
+            })
+            .finally(function() {
+                 // Restore button state whether success or failure
+                 submitButton.disabled = false;
+                 submitButton.innerHTML = originalButtonText;
             });
     }
-});
+}); // End of DOMContentLoaded
